@@ -8,15 +8,15 @@ public class Validate_Person {
         boolean b = false;
         for(Person p : list){
             if(p.getName().isEmpty() || p.getName() == null){
-                s += "not valid name \n";
+                s += "not valid name\n";
                 b = true;
             }
             if(p.getAge() <= 0){
-                s += "not valid age \n";
+                s += "not valid age\n";
                 b = true;
             }
             if(p.getMail().isEmpty() || p.getMail() == null){
-                s += "not valid mail \n";
+                s += "not valid mail\n";
                 b = true;
             }
             if(p.getNumber() <= 0){
