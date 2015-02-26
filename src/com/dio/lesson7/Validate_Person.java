@@ -1,23 +1,31 @@
 package com.dio.lesson7;
 
 import java.util.ArrayList;
-import java.util.ServiceConfigurationError;
 
 public class Validate_Person {
     public void validarePerson(ArrayList <Person> list){
+        String s ="";
+        boolean b = false;
         for(Person p : list){
             if(p.getName().isEmpty() || p.getName() == null){
-                throw new ArrayIndexOutOfBoundsException("not valid name");
+                s += "not valid name \n";
+                b = true;
             }
-            else if(p.getAge() <= 0){
-                throw new NumberFormatException("not valid Age");
+            if(p.getAge() <= 0){
+                s += "not valid age \n";
+                b = true;
             }
             if(p.getMail().isEmpty() || p.getMail() == null){
-                throw new ServiceConfigurationError("not valid Mail");
+                s += "not valid mail \n";
+                b = true;
             }
             if(p.getNumber() <= 0){
-                throw new ArithmeticException("not valid Number");
+                s += "not valid number\n";
+                b = true;
             }
+        }
+        if(b){
+            throw new ArrayIndexOutOfBoundsException(s);
         }
     }
 }

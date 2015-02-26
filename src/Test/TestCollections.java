@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.ServiceConfigurationError;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -61,7 +60,7 @@ public class TestCollections {
         ArrayList <Person> personList1 = new ArrayList<Person>(Arrays.asList(p1));
         ArrayList <Person> personList2 = new ArrayList<Person>(Arrays.asList(p2));
 
-        doThrow(new ArrayIndexOutOfBoundsException("not valid name")).
+        doThrow(new ArrayIndexOutOfBoundsException("not valid name\n")).
                 when(validP).validarePerson(personList2);
 
         when(arrayH.innerUnion(personList1,personList2)).thenReturn(personList2);
@@ -71,7 +70,7 @@ public class TestCollections {
             fail();
         }
         catch (ArrayIndexOutOfBoundsException e){
-            assertEquals(e.getMessage(), "not valid name");
+            assertEquals(e.getMessage(), "not valid name\n");
         }
         verifyNoMoreInteractions(arrayH);
     }
@@ -122,9 +121,7 @@ public class TestCollections {
         ArrayList <Person> personList1 = new ArrayList<Person>(Arrays.asList(p1));
         ArrayList <Person> personList2 = new ArrayList<Person>(Arrays.asList(p2));
 
-        doThrow(new ArrayIndexOutOfBoundsException("not valid name")).
-                when(validP).validarePerson(personList2);
-        doThrow(new NumberFormatException("not valid Age")).
+        doThrow(new ArrayIndexOutOfBoundsException("not valid name\nnot valid age\n")).
                 when(validP).validarePerson(personList2);
 
         when(arrayH.innerUnion(personList1, personList2)).thenReturn(personList2);
@@ -134,10 +131,8 @@ public class TestCollections {
             fail();
         }
         catch (ArrayIndexOutOfBoundsException e){
-            assertEquals(e.getMessage(),"not valid name");
-        }
-        catch (NumberFormatException e){
-            assertEquals(e.getMessage(),"not valid Age");
+            assertEquals(e.getMessage(),"not valid name\n" +
+                    "not valid age\n");
         }
         verifyNoMoreInteractions(arrayH);
     }
@@ -189,13 +184,7 @@ public class TestCollections {
         ArrayList <Person> personList1 = new ArrayList<Person>(Arrays.asList(p1));
         ArrayList <Person> personList2 = new ArrayList<Person>(Arrays.asList(p2));
 
-        doThrow(new ArrayIndexOutOfBoundsException("not valid name")).
-                when(validP).validarePerson(personList2);
-        doThrow(new NumberFormatException("not valid Age")).
-                when(validP).validarePerson(personList2);
-        doThrow(new ServiceConfigurationError("not valid Mail")).
-                when(validP).validarePerson(personList2);
-        doThrow(new ArithmeticException("not valid Number")).
+        doThrow(new ArrayIndexOutOfBoundsException("not valid name\nnot valid Age\nnot valid Mail\nnot valid Number\n")).
                 when(validP).validarePerson(personList2);
 
         when(arrayH.innerUnion(personList1, personList2)).thenReturn(personList2);
@@ -205,16 +194,10 @@ public class TestCollections {
             fail();
         }
         catch (ArrayIndexOutOfBoundsException e){
-            assertEquals(e.getMessage(),"not valid name");
-        }
-        catch (NumberFormatException e){
-            assertEquals(e.getMessage(),"not valid Age");
-        }
-        catch (ServiceConfigurationError e){
-            assertEquals(e.getMessage(),"not valid Mail");
-        }
-        catch (ArithmeticException e){
-            assertEquals(e.getMessage(),"not valid Number");
+            assertEquals(e.getMessage(),"not valid name\n" +
+                    "not valid Age\n" +
+                    "not valid Mail\n" +
+                    "not valid Number");
         }
 
         verifyNoMoreInteractions(arrayH);
