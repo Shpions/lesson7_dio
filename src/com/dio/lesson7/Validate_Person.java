@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Validate_Person {
     public void validarePerson(ArrayList <Person> list){
+        //local code review (vtegza): use readable names @ 3/2/2015
         String s ="";
         boolean b = false;
         for(Person p : list){

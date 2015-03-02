@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
+//local code review (vtegza): create test folder - not a package, it should start with lover case @ 3/2/2015
 public class TestCollections {
 
     @Test
